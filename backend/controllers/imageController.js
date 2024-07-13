@@ -32,19 +32,25 @@ const getImageById = async (req, res) => {
 };
 
 const createImage = async (req, res) => {
+
+    // console.log("File:", req.file.path);
+    // console.log("Body:", req.body);
+
     try {
+        console.log(`MASUUK SINI`)
         if (!req.file) {
+            console.log(`req.file tidak masuk`)
             return res.status(400).json({ message: 'No file uploaded or invalid file type' });
         }
 
-        const { caption } = req.body;
+        const { caption, image_urll } = req.body;
         const userId = req.loggedUser.id;
         const imageUrl = req.file.path;
         const username = req.loggedUser.username;
 
         const image = await Image.create({
             user_id: userId,
-            image_url: imageUrl,
+            image_url: imageUrl || image_urll,
             caption: caption || `Uploaded by ${username}`
         });
 

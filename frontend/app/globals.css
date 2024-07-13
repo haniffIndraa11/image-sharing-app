@@ -2,3 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* add color white to web background */
+body {
+    background-color: white;
+}
